@@ -1,0 +1,31 @@
+{% if request.user.is_authenticated %}
+    <p>{{ request.user }}</p>
+    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Выйти</button>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">Войти</a>
+{% endif %}
+<hr>
+<h1>My To do list</h1>
+<a href="{% url 'task-create' %}">Создать задачу</a>
+
+<table>
+    <tr>
+    <th>Item</th>
+    <th></th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{task.title}}</td>
+        <td><a href="{% url 'task' task.id %}">Показать</a></td>
+        <td><a href="{% url 'task-update' task.id %}">Изменить</a></td>
+        <td><a href="{% url 'task-delete' task.id %}">Удалить</a></td>
+    </tr>
+    {% empty %}
+    <h3>No items in task</h3>
+    {% endfor %}
+
+
+</table>

@@ -1,0 +1,7 @@
+<a href="{%url 'tasks'%}">Выход</a>
+<form method="post">
+    {%csrf_token%}
+    <p>Вы уверене что хотите удалить задачу? {{task.title}}</p>
+    <input type="submit" value="Удалить"/>
+
+</form>
